@@ -8,7 +8,10 @@
     ".": "./dist/step-element.es.js"
   },
   "types": "types/step-element.d.ts",
-  "files": ["dist", "types"],
+  "files": [
+    "dist",
+    "types"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build"

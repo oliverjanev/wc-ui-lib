@@ -5,6 +5,7 @@ import { buttonStyles } from './step-button.styles';
 @customElement('step-button')
 export class StepButton extends LitElement {
   @property({ type: String }) label = 'Step';
+  @property({ type: Boolean }) selected = false;
 
   render() {
     return html`
