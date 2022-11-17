@@ -2,7 +2,6 @@ import { LitElement, css, html } from 'lit';
 import { customElement, queryAll } from 'lit/decorators.js';
 import { StepButton } from '../step-button/StepButton';
 import { StepItem } from '../step-item/StepItem';
-import { StepNavigator } from '../step-navigator/StepNavigator';
 
 @customElement('step-element')
 export class StepElement extends LitElement {
@@ -17,11 +16,21 @@ export class StepElement extends LitElement {
   render() {
     return html`
       <step-navigator @click=${this.selectStep}>
-        <step-button selected="${true}" label="Basket"></step-button>
-        <step-button label="Address"></step-button>
-        <step-button label="Options"></step-button>
-        <step-button label="Shipping"></step-button>
-        <step-button label="Payment"></step-button>
+        <step-button selected="${true}" label="Basket">
+          <span name="num">1</span>
+        </step-button>
+        <step-button label="Address">
+          <span name="num">2</span>
+        </step-button>
+        <step-button label="Options">
+          <span name="num">3</span>
+        </step-button>
+        <step-button label="Shipping">
+          <span name="num">4</span>
+        </step-button>
+        <step-button label="Payment">
+          <span name="num">5</span>
+        </step-button>
       </step-navigator>
 
       <step-item selected="${true}">Basket Content</step-item>
@@ -33,7 +42,9 @@ export class StepElement extends LitElement {
   }
 
   selectStep(event: MouseEvent) {
-    const stepButton: StepButton = event.target;
+    const stepButton: StepButton = event.target as StepButton;
+    if (stepButton.tagName === 'STEP-NAVIGATOR') return;
+
     this.stepButtons.forEach((elem: StepButton, idx: number) => {
       elem.selected = false;
       if (this.stepItems[idx]) this.stepItems[idx].selected = false;
