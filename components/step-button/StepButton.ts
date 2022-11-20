@@ -6,11 +6,10 @@ import { buttonStyles } from './step-button.styles';
 @customElement('step-button')
 export class StepButton extends LitElement {
   @property({ type: String }) label = 'Step';
-  @property({ type: Boolean }) selected = false;
-  @property({ type: Boolean }) horizontal = true;
+  @property({ type: Boolean, reflect: true }) selected = false;
+  @property({ type: Boolean, reflect: true }) horizontal = true;
 
   render() {
-    console.log(this.label, this.horizontal);
     const classes = {
       columns: this.horizontal,
       rows: this.horizontal === false,

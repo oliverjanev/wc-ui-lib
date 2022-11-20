@@ -5,8 +5,6 @@ import { StepItem } from '../step-item/StepItem';
 
 @customElement('step-element')
 export class StepElement extends LitElement {
-  selectedIdx: boolean = false;
-
   @queryAll('step-item')
   stepItems!: NodeListOf<StepItem>;
 
@@ -15,7 +13,7 @@ export class StepElement extends LitElement {
 
   render() {
     return html`
-      <step-navigator @click=${this.selectStep}>
+      <step-navigator @click=${this.selectStep} direction="vertical">
         <step-button selected=${true} label="Basket">
           <span name="num">1</span>
         </step-button>
@@ -31,19 +29,19 @@ export class StepElement extends LitElement {
         <step-button label="Payment">
           <span name="num">5</span>
         </step-button>
-      </step-navigator>
 
-      <step-item selected="${true}">Basket Content</step-item>
-      <step-item>Address Content</step-item>
-      <step-item>Options Content</step-item>
-      <step-item>Shipping Content</step-item>
-      <step-item>Payment Content</step-item>
+        <step-item selected="${true}">Basket Content</step-item>
+        <step-item>Address Content</step-item>
+        <step-item>Options Content</step-item>
+        <step-item>Shipping Content</step-item>
+        <step-item>Payment Content</step-item>
+      </step-navigator>      
     `;
   }
 
   selectStep(event: MouseEvent) {
     const stepButton: StepButton = event.target as StepButton;
-    if (stepButton.tagName === 'STEP-NAVIGATOR') return;
+    if (stepButton.tagName !== 'STEP-BUTTON') return;
 
     this.stepButtons.forEach((elem: StepButton, idx: number) => {
       elem.selected = false;
@@ -56,8 +54,31 @@ export class StepElement extends LitElement {
   }
 
   static styles = css`
-  step-navigator {
+  :host {
     display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-column: span 7;
+  }
+  step-navigator[direction="horizontal"] {
+    width: 100%;
+    display: grid;
+    
+    grid-column: span 7;
+    grid-column-start: 2;
+    grid-column-end: 7;
+  }
+
+  step-navigator[direction="horizontal"] step-item[selected] {
+    grid-column: span 5;
+  }
+
+  step-navigator[direction="vertical"] {
+    width: 100%;
+    display: grid;
+    
+    grid-column: span 7;
+    grid-column-start: 1;
+    grid-column-end: 8;
   }
   `;
 }

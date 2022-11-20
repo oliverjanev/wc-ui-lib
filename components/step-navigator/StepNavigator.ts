@@ -1,18 +1,21 @@
 import { LitElement, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { navigatorStyles } from './step-navigator.styles';
 
 @customElement('step-navigator')
 export class StepNavigator extends LitElement {
+  static styles = navigatorStyles;
+
+  @property({ type: String, reflect: true })
+  direction: 'vertical' | 'horizontal' = 'horizontal';
+
   render() {
     return html`
-      <div>
+      <div class=${this.direction}>
         <slot><slot>
       </div>
     `;
   }
-
-  static styles = navigatorStyles;
 }
 
 declare global {

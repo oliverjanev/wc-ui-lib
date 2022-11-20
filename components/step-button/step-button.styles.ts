@@ -1,14 +1,17 @@
 import { css, CSSResult } from 'lit';
 
 export const buttonStyles: CSSResult = css`
-
+:host {
+  // max-width: 11.75rem;
+}
 div {
   border: 1px solid #c2c2c2;
+  height: 3.5rem;
   position: relative;
 }
 button {
   width: 100%;
-  height: 3.5rem;
+  height: 100%;
   position: relative;
   overflow: hidden;
   transition: background 400ms;
@@ -30,7 +33,9 @@ button {
 }
 
 .rows {
-  gap: 0.2rem;
+  gap: 0.3rem;
+  height: 4.3rem;
+  font-size: 1rem
 }
 
 .border {
@@ -79,12 +84,32 @@ button > span {
   pointer-events: none;
 }
 
+::slotted(span) {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  line-height: 1.7;
+}
+
+.rows ::slotted(span) {
+  margin: 0 auto;
+}
+
+:host([selected]) ::slotted(span) {
+  color: #fff;
+  background-color: #000;
+}
+
+:host(:not([selected])) ::slotted(span) {
+  border: 1px solid #000;
+}
+
 span.ripple {
   position: absolute;
   border-radius: 50%;
   transform: scale(0);
   animation: ripple 600ms linear;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(254, 254, 254, 0.7);
 }
 
 @keyframes ripple {
