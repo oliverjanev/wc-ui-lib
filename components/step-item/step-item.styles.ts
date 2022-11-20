@@ -1,10 +1,10 @@
-import { css } from 'lit';
+import { css, CSSResult } from 'lit';
 
-export const itemStyles = css`
+export const itemStyles: CSSResult = css`
 div {
   background: #1e90ff;
   color: #fff;
-  height: calc(100vh - 2.5rem);
+  height: calc(100vh - 3.5rem);
   width: 100%;
 }
 

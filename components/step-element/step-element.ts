@@ -16,7 +16,7 @@ export class StepElement extends LitElement {
   render() {
     return html`
       <step-navigator @click=${this.selectStep}>
-        <step-button selected="${true}" label="Basket">
+        <step-button selected=${true} label="Basket">
           <span name="num">1</span>
         </step-button>
         <step-button label="Address">

@@ -1,19 +1,30 @@
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { buttonStyles } from './step-button.styles';
 
 @customElement('step-button')
 export class StepButton extends LitElement {
   @property({ type: String }) label = 'Step';
   @property({ type: Boolean }) selected = false;
+  @property({ type: Boolean }) horizontal = true;
 
   render() {
+    console.log(this.label, this.horizontal);
+    const classes = {
+      columns: this.horizontal,
+      rows: this.horizontal === false,
+    };
+    const divClass = {
+      active: this.selected,
+    };
     return html`
-      <div>
-        <button @click=${this.createRipple}>
+      <div class=${classMap(divClass)}>
+        <button class=${classMap(classes)} @click=${this.createRipple}>
           <span>${this.label}</span>
           <slot class="num" name="num"><slot>
         </button>
+        <span class="border"></span>
       </div>
     `;
   }
